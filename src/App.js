@@ -1,10 +1,9 @@
-
-import Yard from "../src/components/Yard";
+import Login from "../src/components/login"
 
 function App() {
   return (
     <div>
-      <Yard />
+      <Login />
     </div>
   );
 }
