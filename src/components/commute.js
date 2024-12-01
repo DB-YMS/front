@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate 추가
 import './commute.css'; // 스타일링 파일 연결
 
 const Commute = () => {
@@ -6,6 +7,7 @@ const Commute = () => {
   const [clockOut, setClockOut] = useState(null);
   const [isClockInPopupVisible, setIsClockInPopupVisible] = useState(false);
   const [isClockOutPopupVisible, setIsClockOutPopupVisible] = useState(false);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   // 시간 포맷 함수: 년, 월, 일, 시, 분까지만 출력
   const formatDateTime = (date) => {
@@ -37,46 +39,57 @@ const Commute = () => {
     setIsClockOutPopupVisible(false); // 퇴근 팝업 닫기
   };
 
+  const handleBackToMobile = () => {
+    navigate('/mobile'); // /mobile 경로로 이동
+  };
+
   return (
-    <div className="commute-container">
-      <h1>출퇴근 기록</h1>
-      <div className="time-display">
-        <p>출근 시간: {clockIn || '기록 없음'}</p>
-        <p>퇴근 시간: {clockOut || '기록 없음'}</p>
-      </div>
-      <div className="button-group">
-        <button className="clock-in-btn" onClick={handleClockIn}>출근</button>
-        <button className="clock-out-btn" onClick={handleClockOut}>퇴근</button>
-      </div>
+    <div className="relative w-full h-screen bg-gray-100">
+      {/* Back Button */}
+      <button
+        className="absolute top-6 left-4 text-gray-600 text-xl"
+        onClick={handleBackToMobile}
+      >
+        ❮
+      </button>
 
-      {/* 출근 팝업 모달 */}
-      {isClockInPopupVisible && (
-        <div className="popup-overlay">
-          <div className="popup">
-            <h2>출근 기록</h2>
-            <p>출근 시간이 기록되었습니다:</p>
-            <p className="popup-time">{clockIn}</p>
-            <button onClick={handleCloseClockInPopup}>확인</button>
-          </div>
+      <div className="commute-container">
+        <h1>출퇴근 기록</h1>
+        <div className="time-display">
+          <p>출근 시간: {clockIn || '기록 없음'}</p>
+          <p>퇴근 시간: {clockOut || '기록 없음'}</p>
         </div>
-      )}
+        <div className="button-group">
+          <button className="clock-in-btn" onClick={handleClockIn}>출근</button>
+          <button className="clock-out-btn" onClick={handleClockOut}>퇴근</button>
+        </div>
 
-      {/* 퇴근 팝업 모달 */}
-      {isClockOutPopupVisible && (
-        <div className="popup-overlay">
-          <div className="popup">
-            <h2>퇴근 기록</h2>
-            <p>퇴근 시간이 기록되었습니다:</p>
-            <p className="popup-time">{clockOut}</p>
-            <button onClick={handleCloseClockOutPopup}>확인</button>
+        {/* 출근 팝업 모달 */}
+        {isClockInPopupVisible && (
+          <div className="popup-overlay">
+            <div className="popup">
+              <h2>출근 기록</h2>
+              <p>출근 시간이 기록되었습니다:</p>
+              <p className="popup-time">{clockIn}</p>
+              <button onClick={handleCloseClockInPopup}>확인</button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+
+        {/* 퇴근 팝업 모달 */}
+        {isClockOutPopupVisible && (
+          <div className="popup-overlay">
+            <div className="popup">
+              <h2>퇴근 기록</h2>
+              <p>퇴근 시간이 기록되었습니다:</p>
+              <p className="popup-time">{clockOut}</p>
+              <button onClick={handleCloseClockOutPopup}>확인</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default Commute;
-
-
-  
