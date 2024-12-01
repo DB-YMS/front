@@ -1,12 +1,13 @@
 
-import Yard from "../src/components/Yard";
+import MissionPage from "../src/components/MissionPage";
 
 function App() {
   return (
     <div>
-      <Yard />
+      <MissionPage />
     </div>
   );
+  
 }
 
 export default App;
