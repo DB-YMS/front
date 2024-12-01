@@ -5,7 +5,7 @@ const UserProfile = ({ name, division, curLoc }) => {
     <div
       style={{
         position: "absolute",
-        top: "80px",
+        top: "30px",
         left: "50%",
         transform: "translateX(-50%)",
       }}

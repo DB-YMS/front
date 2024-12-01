@@ -12,7 +12,7 @@ const ButtonGrid = () => {
   const buttons = ["Commute", "Transit", "Etc 1", "Etc 2", "Etc 3", "Etc 4"];
 
   return (
-    <div className="absolute top-[150px] left-1/2 transform -translate-x-1/2 w-full max-w-[320px] grid grid-cols-2 gap-4">
+    <div className="absolute top-[110px] left-1/2 transform -translate-x-1/2 w-full max-w-[320px] grid grid-cols-2 gap-4">
       {buttons.map((label) => (
         <CustomButton
           key={label}

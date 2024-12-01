@@ -9,8 +9,8 @@ const CustomButton = ({ label, isSelected, onClick, styles = {} }) => {
       }`}
       style={{
         ...styles,
-        height: "140px", // 버튼 높이 (기본값 120px)
-        width: "140px", // 버튼 너비 (기본값 140px)
+        height: "100px", // 버튼 높이 (기본값 120px)
+        width: "120px", // 버튼 너비 (기본값 140px)
         margin: "0 auto", // 버튼을 가운데 정렬
       }}
     >
