@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomButton from "./Button";
+import CustomButton from "./button";
 
 const ButtonGrid = () => {
   const [selectedButton, setSelectedButton] = useState(null);
