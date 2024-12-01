@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate 가져오기
 
 function SignupPage() {
   // 상태 관리
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    id: "",
     password: "",
     confirmPassword: "",
   });
 
   const [error, setError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   // 입력값 변경 핸들러
   const handleChange = (e) => {
@@ -37,12 +40,13 @@ function SignupPage() {
     }
 
     setError("");
+    setIsModalOpen(true); // 회원가입 완료 후 모달 창 열기
+  };
 
-    // 회원가입 요청 (예: API 호출)
-    console.log("회원가입 데이터:", formData);
-
-    // 성공적으로 회원가입 후 처리
-    alert("회원가입이 완료되었습니다!");
+  // 확인 버튼 클릭 시 로그인 페이지로 이동
+  const handleModalConfirm = () => {
+    setIsModalOpen(false); // 모달 닫기
+    navigate("/login"); // 로그인 페이지로 이동
   };
 
   return (
@@ -67,12 +71,12 @@ function SignupPage() {
         <div style={styles.inputGroup}>
           <label htmlFor="id">아이디</label>
           <input
-            type="id"
+            type="text"
             id="id"
             name="id"
-            value={formData.email}
+            value={formData.id}
             onChange={handleChange}
-            placeholder="아이디을 입력하세요"
+            placeholder="아이디를 입력하세요"
             style={styles.input}
           />
         </div>
@@ -107,6 +111,18 @@ function SignupPage() {
           회원가입
         </button>
       </form>
+
+      {/* 모달 창 */}
+      {isModalOpen && (
+        <div style={styles.modalOverlay}>
+          <div style={styles.modal}>
+            <p style={styles.modalText}>회원가입이 완료되었습니다!</p>
+            <button onClick={handleModalConfirm} style={styles.modalButton}>
+              확인
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -143,12 +159,39 @@ const styles = {
     borderRadius: "4px",
     cursor: "pointer",
   },
-  buttonHover: {
-    backgroundColor: "#0056b3",
-  },
   error: {
     color: "red",
     marginBottom: "15px",
+  },
+  modalOverlay: {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "8px",
+    textAlign: "center",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+  },
+  modalText: {
+    marginBottom: "20px",
+    fontSize: "16px",
+  },
+  modalButton: {
+    padding: "10px 20px",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
   },
 };
 
