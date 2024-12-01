@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import DivisionAndYardSelect from "./divisionYardSelect";
 import EquipmentStatusSelect from "./equipmentSelect";
+import Parking from "./parking";
 
 const Yard = () => {
   const [selectedDivision, setSelectedDivision] = useState("LA");
   const [selectedEquipment, setSelectedEquipment] = useState(null);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(8); // 초기 총 페이지 수
+  const [totalPages, setTotalPages] = useState(8); // 초기 총 페이지 수 
 
   const handleDivisionChange = (event) => {
     setSelectedDivision(event.target.value);
@@ -54,6 +55,8 @@ const Yard = () => {
         handleEquipmentClick={handleEquipmentClick} 
       />
 
+      <Parking
+        equipment />
 
       
     </div>
