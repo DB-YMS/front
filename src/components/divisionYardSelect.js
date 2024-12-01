@@ -3,7 +3,7 @@ import React from "react";
 
 const DivisionAndYardSelect = ({ selectedDivision, handleDivisionChange, page, totalPages, incrementPage, decrementPage, incrementPageCount, decrementPageCount }) => {
   return (
-    <div className="flex mb-4 justify-between items-center p-2 bg-[#F2F2F2] rounded-lg">
+    <div className="flex mb-[16px] justify-between items-center p-2 bg-[#F2F2F2] rounded-lg">
       {/* Division Selection */}
       <div className="flex items-center">
         <select
@@ -14,6 +14,8 @@ const DivisionAndYardSelect = ({ selectedDivision, handleDivisionChange, page, t
           <option value="LA">LA</option>
           <option value="PHX">PHX</option>
           <option value="HOU">HOU</option>
+          <option value="HOU">SAV</option>
+          <option value="HOU">MOV</option>
         </select>
       </div>
 

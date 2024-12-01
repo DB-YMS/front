@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import DivisionAndYardSelect from "./divisionYardSelect";
 import EquipmentStatusSelect from "./equipmentSelect";
+import Parking from "./parking";
 
 const Yard = () => {
   const [selectedDivision, setSelectedDivision] = useState("LA");
@@ -54,6 +55,8 @@ const Yard = () => {
         handleEquipmentClick={handleEquipmentClick} 
       />
 
+      <Parking
+        equipment />
 
       
     </div>
