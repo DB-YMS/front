@@ -1,6 +1,40 @@
 import React, { useState } from "react";
 
 const Login = () => {
+  /*state to manage form data*/
+  const [formData, setFormData] = useState({ id: "", password: ""});
+
+  /*Handle input change*/
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value}));
+  };
+
+  /* Handle login button click*/
+  const handleLogin = () => {
+    if (formData.id && formData.password) {
+      console.log("Loging in with:", formData);
+      alert('Welcome, ${formData.id}!');
+
+    } else {
+      alert("Please fill in all fields.");
+    }
+  };
+
+  /*Handle signup button click*/
+  const handleSignup = () => {
+    alert("Redirecting to sign-up page...");
+    /*you can navigate to a sign up page here if needed*/
+  };
+
+  /* Handle password recovery*/
+  const handleForgotPassword = () => {
+    alert("Redirecting to password recovery...");
+  };
+
+  
+
+  
 	return(
 		<div className="flex flex-col items-center justify-center h-screen bg-white">
       {/* 로고 이미지 */}
@@ -45,7 +79,8 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
+
 
 
 export default Login;
