@@ -20,8 +20,7 @@ const Login = () => {
   };
 
   const handleSignup = () => {
-    alert("Redirecting to sign-up page...");
-    navigate("/signup");
+    navigate("/signup"); // 팝업 없이 바로 /signup으로 이동
   };
 
   return (
@@ -56,7 +55,7 @@ const Login = () => {
           </button>
           <button
             type="button"
-            onClick={handleSignup}
+            onClick={handleSignup} // alert 없이 바로 이동
             className="w-full py-3 text-gray-500 font-bold rounded-lg shadow-md hover:bg-gray-200 transition duration-200"
           >
             Sign up
