@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate 추가
 import './EquimentCheck.css';
 
 const EquipmentCheck = () => {
@@ -6,6 +7,7 @@ const EquipmentCheck = () => {
   const [isSubmittedPopupVisible, setIsSubmittedPopupVisible] = useState(false);
   const [isNoIssuePopupVisible, setIsNoIssuePopupVisible] = useState(false);
   const [issueDetails, setIssueDetails] = useState('');
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleOpenIssuePopup = () => {
     setIsIssuePopupVisible(true);
@@ -20,16 +22,28 @@ const EquipmentCheck = () => {
     e.preventDefault();
     setIsIssuePopupVisible(false);
     setIsSubmittedPopupVisible(true);
-    setTimeout(() => setIsSubmittedPopupVisible(false), 1000); // 3초 후 팝업 닫기
+    setTimeout(() => setIsSubmittedPopupVisible(false), 1000); // 1초 후 팝업 닫기
   };
 
   const handleNoIssue = () => {
     setIsNoIssuePopupVisible(true);
-    setTimeout(() => setIsNoIssuePopupVisible(false), 1000); // 3초 후 팝업 닫기
+    setTimeout(() => setIsNoIssuePopupVisible(false), 1000); // 1초 후 팝업 닫기
+  };
+
+  const handleBackToMobile = () => {
+    navigate('/mobile'); // /mobile 경로로 이동
   };
 
   return (
     <div className="equipment-check-container">
+      {/* Back Button */}
+      <button
+        className="absolute top-3 left-4 text-gray-600 text-xl"
+        onClick={handleBackToMobile}
+      >
+        ❮
+      </button>
+
       <header className="header">장비 점검</header>
 
       {/* 하단 버튼 */}
