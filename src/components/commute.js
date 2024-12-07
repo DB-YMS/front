@@ -54,7 +54,7 @@ const Commute = () => {
       </button>
 
       <div className="commute-container">
-        <h1>출퇴근 기록</h1>
+        <h1>출 퇴근 기록</h1>
         <div className="time-display">
           <p>출근 시간: {clockIn || '기록 없음'}</p>
           <p>퇴근 시간: {clockOut || '기록 없음'}</p>
