@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // 수정된 부분
+import { useNavigate } from "react-router-dom"; // useNavigate 추가
 import MissionList from "./MissionList";
 import MissionDetail from "./MissionDetail";
 
@@ -10,17 +10,41 @@ const missions = [
 ];
 
 const MissionPage = () => {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const [selectedMission, setSelectedMission] = useState(null);
   const [completedMissions, setCompletedMissions] = useState([]);
-  const navigate = useNavigate(); // 수정된 부분: useNavigate 선언
+  const [missionStatus, setMissionStatus] = useState(
+    missions.reduce((acc, mission) => {
+      acc[mission.id] = { isStarted: false, isCompleted: false, statusMessage: "" };
+      return acc;
+    }, {})
+  );
 
   const handleMissionClick = (mission) => setSelectedMission(mission);
 
-  const handleComplete = () => {
-    if (selectedMission) {
-      setCompletedMissions([...completedMissions, selectedMission.id]);
-      setSelectedMission(null);
-    }
+  const handleComplete = (missionId) => {
+    setCompletedMissions([...completedMissions, missionId]);
+    setMissionStatus((prevState) => ({
+      ...prevState,
+      [missionId]: { ...prevState[missionId], isCompleted: true, statusMessage: "도착 완료!" },
+    }));
+    setSelectedMission(null);
+  };
+
+  const handleStart = (missionId) => {
+    setMissionStatus((prevState) => ({
+      ...prevState,
+      [missionId]: { ...prevState[missionId], isStarted: true, statusMessage: "이동중..." },
+    }));
+  };
+
+  const handleArrival = (missionId) => {
+    if (!missionStatus[missionId].isStarted) return;
+    setMissionStatus((prevState) => ({
+      ...prevState,
+      [missionId]: { ...prevState[missionId], isCompleted: true, statusMessage: "도착 완료!" },
+    }));
+    setTimeout(() => handleComplete(missionId), 100);
   };
 
   const handleBack = () => {
@@ -28,7 +52,7 @@ const MissionPage = () => {
   };
 
   const handleBackToMobile = () => {
-    navigate("/mobile"); // 수정된 부분: /mobile 경로로 이동
+    navigate("/mobile"); // /mobile 경로로 이동
   };
 
   return (
@@ -36,7 +60,7 @@ const MissionPage = () => {
       {/* Back Button */}
       <button
         className="absolute top-6 left-4 text-gray-600 text-xl"
-        onClick={handleBackToMobile} // 수정된 부분
+        onClick={handleBackToMobile}
       >
         ❮
       </button>
@@ -57,8 +81,10 @@ const MissionPage = () => {
       {selectedMission && (
         <MissionDetail
           selectedMission={selectedMission}
-          handleComplete={handleComplete}
-          handleBack={handleBack} // 상세창 닫는 로직
+          handleStart={handleStart}
+          handleArrival={handleArrival}
+          handleBack={handleBack}
+          missionStatus={missionStatus}
         />
       )}
     </div>
